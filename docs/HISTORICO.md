@@ -1,5 +1,10 @@
 # Histórico de versões
 
+## 2026-11-25 — Versão 1.3: mapa de pergaminho e acabamento
+- Mapa redesenhado como carta antiga: terra cor de velino, mar em aguada de verdete, montanhas e rótulos em tinta sépia, cidades como selos em ultramar e ouro, posição atual marcada em vermelho de rubrica.
+- Corrigidos nomes antigos que ainda apareciam no mapa (rótulos em maiúsculas) e a árvore do sábio Alvar.
+- Medidores do Retornos com anel de tinta e rótulos em itálico; etiquetas da batalha, abas, fichas e avisos com cantos discretos; capitular gótica no emblema da batalha.
+
 ## 2026-11-25 — Versão 1.2: visual "códice do copista"
 - Direção nova, mais sóbria: o jogo como o manuscrito que Tomás copia. Pigmentos de iluminura em cores chapadas (ultramar para a ação principal, rubrica para perigo, ouro só em filetes e capitulares), sem degradês nem brilhos.
 - Logotipo: capitular "A" iluminada (ultramar e ouro) + "Ampulheta" em letra gótica (UnifrakturMaguntia) e ampulheta desenhada a traço com a areia caindo.
