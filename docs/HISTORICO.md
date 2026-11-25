@@ -1,5 +1,12 @@
 # Histórico de versões
 
+## 2026-11-25 — Versão 1.1: visual medieval
+- Logotipo novo: brasão vinho com borda de ouro e uma ampulheta com areia caindo (SVG animado, `.sigilo`), no lugar do relógio.
+- Paleta nova: couro escuro, pergaminho, ouro, vinho e verdete (`:root`); azuis da interface trocados por tons quentes.
+- Fontes: Cinzel e Cinzel Decorative (títulos) e Alegreya Sans (texto).
+- Botões em placas de couro com borda de bronze; botão principal em folha de ouro; ícones novos dos modos (ampulheta e castelo) e dos medidores (☽ ♥ ❦ ♜).
+- Ícones do app (PWA) redesenhados com o brasão da ampulheta.
+
 ## 2026-11-25 — Versão 1.0: A Ampulheta de Cinzas
 - Jogo novo, feito a partir de uma cópia do motor de `return-from-death-zero-` (o original não foi alterado).
 - Todos os nomes trocados: pessoas, lugares, monstros, facções, itens e títulos (Tomás de Alvor, Isolda, Leonor, Inês, Violante, Duarte de Montefrio, Reino de Lusávia, Valcorte, Canalvira, Bravânia, Alcarra, Norvália...).
