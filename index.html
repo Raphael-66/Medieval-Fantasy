@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#15100c">
+<meta name="theme-color" content="#1b1713">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -13,15 +13,16 @@
 <style>:root{color-scheme:dark;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>A Ampulheta de Cinzas</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@400;500;700&family=Cinzel:wght@500;700&family=Cinzel+Decorative:wght@700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;1,400&family=IM+Fell+English:ital@0;1&family=UnifrakturMaguntia&display=swap">
 <style>
 /* Layout: one-screen mobile game. Header strip, mood-art stage, dialogue box at the thumb. Hub and AI table share the same panels. Single dark look, committed. */
 :root{
-  --ink:#15100c; --ink2:#221a13; --ink3:#2f241a; --line:#5a4430;
-  --paper:#efe3c8; --mute:#a89a80; --ice:#9cc7b4; --blood:#b3283f; --gold:#d6a548; --moon:#d9c7a0;
-  --leaf:#7fa36a; --bronze:#a8743a;
-  --display:"Cinzel","Trajan Pro","Palatino Linotype",Georgia,serif;
+  --ink:#1b1713; --ink2:#24201a; --ink3:#2e2821; --line:#4b4237;
+  --paper:#e9ddc4; --mute:#a69a85; --ice:#7fae9c; --blood:#b4463a; --gold:#c9a24a; --moon:#c7bfdc;
+  --lapis:#2f4a8f; --lapis2:#24396f; --rubric:#b4463a;
+  --display:"IM Fell English","Iowan Old Style","Palatino Linotype",Georgia,serif;
   --body:"Alegreya Sans","Gill Sans","Segoe UI",system-ui,sans-serif;
+  --black:"UnifrakturMaguntia","IM Fell English",Georgia,serif;
   color-scheme:dark;
 }
 *{box-sizing:border-box}
@@ -657,85 +658,97 @@ html.calm *,html.calm *::before,html.calm *::after{animation-duration:.01ms!impo
 html.calm .motes{display:none}
 @media (prefers-reduced-motion:reduce){.motes{display:none}.sig .r1,.sig .r2{animation:none}}
 
-/* ===== Tema medieval (A Ampulheta de Cinzas): pergaminho, couro, ouro e vinho ===== */
-body{background:
-  radial-gradient(120% 80% at 50% 0%,rgba(214,165,72,.07),transparent 60%),
-  radial-gradient(90% 60% at 50% 110%,rgba(179,40,63,.10),transparent 60%),
-  repeating-linear-gradient(0deg,rgba(255,240,210,.012) 0 2px,transparent 2px 5px),
-  var(--ink)}
-h1,h2,h3,.sec{font-family:var(--display);letter-spacing:.04em}
-h2{font-weight:700;color:var(--gold)}
-.sec{text-transform:uppercase;font-size:12.5px;letter-spacing:.14em;color:var(--bronze)}
-/* logotipo */
-.sigilo{width:104px;height:122px;flex:none;filter:drop-shadow(0 6px 18px rgba(0,0,0,.6)) drop-shadow(0 0 22px rgba(214,165,72,.18))}
-.sigilo .areiaT{animation:areiaT 9s linear infinite}
-.sigilo .areiaB{animation:areiaB 9s linear infinite}
-.sigilo .fio{animation:fio .6s linear infinite}
-@keyframes areiaT{0%{transform:translateY(0)}92%{transform:translateY(26px)}100%{transform:translateY(0)}}
-@keyframes areiaB{0%{transform:translateY(12px)}92%{transform:translateY(-12px)}100%{transform:translateY(12px)}}
-@keyframes fio{to{stroke-dashoffset:-5}}
-#title h1{font-family:"Cinzel Decorative",var(--display);font-weight:700;color:var(--gold);letter-spacing:.03em;line-height:1.05;
-  background:linear-gradient(180deg,#f6dd98,#d6a548 55%,#9b6a26);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
-  text-shadow:none;filter:drop-shadow(0 2px 0 rgba(0,0,0,.55))}
-#title h1 small{font-size:.55em;vertical-align:.35em}
-#title h1 span{font-size:.72em;letter-spacing:.08em}
-#title::before{background:radial-gradient(circle at 50% 26%,rgba(214,165,72,.16),transparent 46%),radial-gradient(circle at 20% 88%,rgba(179,40,63,.16),transparent 42%)}
-#title .sub{font-style:italic;color:var(--moon)}
-#title .sub::before,#title .sub::after{content:" ✠ ";color:var(--bronze);font-style:normal}
-/* botões: placas de couro com borda de bronze */
-.btn{border-radius:6px;border:1px solid var(--line);
-  background:linear-gradient(180deg,#3a2c1f,#271d15);
-  box-shadow:inset 0 1px 0 rgba(255,230,180,.08),inset 0 0 0 1px rgba(0,0,0,.35),0 2px 0 rgba(0,0,0,.45)}
-.btn:hover{background:linear-gradient(180deg,#463626,#2f241a);border-color:var(--gold)}
-.btn:active{transform:translateY(1px);box-shadow:inset 0 2px 4px rgba(0,0,0,.5)}
-.btn.primary{color:#2a1a08;border:1px solid #7a5420;
-  background:linear-gradient(180deg,#f2d488 0%,#d6a548 55%,#ad7a2e 100%);
-  box-shadow:inset 0 1px 0 rgba(255,250,225,.6),inset 0 0 0 2px rgba(122,84,32,.35),0 3px 0 #5a3a12,0 8px 18px rgba(0,0,0,.35);
-  font-family:var(--display);letter-spacing:.04em}
-.btn.primary:hover{background:linear-gradient(180deg,#f7dd98,#dcae55 55%,#b4823a)}
-.chip{border-radius:6px;background:linear-gradient(180deg,#2f241a,#221a13);border-color:var(--line)}
-.chip:hover{border-color:var(--gold)}
-/* tela inicial: modos */
-#bRG{background:linear-gradient(160deg,#f2d488,#d6a548 50%,#a8743a);border:1px solid #7a5420;
-  box-shadow:inset 0 1px 0 rgba(255,250,225,.55),inset 0 0 0 3px rgba(122,84,32,.25),0 4px 0 #5a3a12,0 14px 30px rgba(0,0,0,.4)}
-#bRG .mic{background:rgba(58,30,8,.14);border:1.5px solid rgba(58,30,8,.45);color:#3a2208}
-#bRG .mtag{background:#3a0d16;color:#f2d488;border-radius:3px}
-#bFree{background:linear-gradient(160deg,#3b2c1f,#241b14);border:1px solid var(--line)}
-#bFree .mic{background:rgba(156,199,180,.08);border:1.5px solid rgba(156,199,180,.4);color:var(--ice)}
-#bFree .mgo{color:var(--ice)}
-.mcard .mtx b{font-family:var(--display);font-weight:700;letter-spacing:.03em}
-.mcard .mic{border-radius:8px}
-.perfchip{border-radius:6px}
-/* cartões e painéis */
-.hubcard,.item,.relic,.mem{border-radius:8px}
-#overlay>.in{border:1px solid var(--line);border-radius:10px;
-  background:linear-gradient(180deg,#2a2018,#1b140f);box-shadow:inset 0 0 0 1px rgba(214,165,72,.14),0 20px 50px rgba(0,0,0,.6)}
-.meters .rgc{box-shadow:inset 0 0 0 2px rgba(0,0,0,.35),0 0 0 2px #5a4430}
-.rgcard{border-radius:14px}
-.bar{border-radius:3px}
+/* ===== Tema "códice do copista": pigmentos de manuscrito em cores chapadas.
+   Ultramar para a ação principal, rubrica para perigo, ouro só em filetes e capitulares. ===== */
+body{background:var(--ink)}
+h1,h2,h3{font-family:var(--display);font-weight:400;letter-spacing:0}
+h2{color:var(--paper);font-size:24px}
+.sec{font-family:var(--display);font-style:italic;font-size:15px;letter-spacing:0;text-transform:none;color:var(--gold)}
+.motes{display:none}
+/* tela inicial */
+#title{gap:14px}
+#title::before{background:none}
+.sigilo{width:44px;height:66px;flex:none;margin-top:6px}
+.sigilo .areiaT{transform-origin:32px 37px;animation:areiaT 12s ease-in infinite}
+.sigilo .areiaB{transform-origin:32px 84px;animation:areiaB 12s ease-out infinite}
+.sigilo .fio{animation:fio .9s linear infinite}
+@keyframes areiaT{0%{transform:scaleY(1)}95%{transform:scaleY(.08)}100%{transform:scaleY(1)}}
+@keyframes areiaB{0%{transform:scaleY(.15)}95%{transform:scaleY(1)}100%{transform:scaleY(.15)}}
+@keyframes fio{to{stroke-dashoffset:-4}}
+@media (prefers-reduced-motion:reduce){.sigilo .areiaT,.sigilo .areiaB,.sigilo .fio{animation:none}}
+html.calm .sigilo *{animation:none}
+#title h1.marca{display:flex;align-items:stretch;gap:12px;margin:2px 0 0;text-align:left;text-shadow:none;filter:none;background:none;-webkit-text-fill-color:currentColor;color:var(--paper)}
+.marca .cap{flex:none;width:76px;display:grid;place-items:center;background:var(--lapis);color:var(--gold);
+  font-family:var(--black);font-size:64px;line-height:1;padding-top:6px;
+  box-shadow:inset 0 0 0 2px var(--lapis),inset 0 0 0 3px var(--gold)}
+.marca .tx{display:flex;flex-direction:column;justify-content:center}
+.marca .l1{font-family:var(--black);font-size:clamp(38px,11vw,52px);line-height:1;color:var(--paper)}
+.marca .l2{font-family:var(--display);font-style:italic;font-size:22px;line-height:1.2;color:var(--mute);margin-top:4px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+#title .sub{font-family:var(--display);font-style:italic;font-size:17px;line-height:1.45;color:var(--mute);max-width:30ch}
+#title .sub::before,#title .sub::after{content:none}
+/* botões: planos, cantos discretos, a cor diz a função */
+.btn{border-radius:3px;border:1px solid var(--line);background:var(--ink3);box-shadow:none;transition:border-color .12s,background .12s}
+.btn:hover{background:#38302700;background:#363027;border-color:#7a6a55}
+.btn:active{transform:none;background:#2a241e}
+.btn.primary{background:var(--lapis);border:1px solid var(--lapis);color:var(--paper);font-family:var(--body);font-weight:700;letter-spacing:.01em;
+  box-shadow:inset 0 -2px 0 var(--lapis2)}
+.btn.primary:hover{background:#3a58a6;border-color:#3a58a6}
+.btn.primary:active{box-shadow:none;transform:translateY(1px)}
+.chip{border-radius:3px;background:var(--ink2);border:1px solid var(--line)}
+.chip:hover{border-color:#7a6a55}
+/* cartões dos modos */
+.stack{width:min(350px,100%)}
+#bRG,#bFree{border-radius:3px;padding:16px 16px}
+#bRG{background:var(--lapis);border:1px solid var(--lapis);box-shadow:inset 0 -3px 0 var(--lapis2);color:var(--paper)}
+#bRG:hover{background:#3a58a6}
+#bRG .mic{background:none;border:1px solid rgba(201,162,74,.7);color:var(--gold);border-radius:2px}
+#bRG .mtx b{color:var(--paper)}
+#bRG .mtx em{color:#c9cfe3}#bRG .mgo{color:var(--gold)}
+#bRG .mtag{display:none}
+#bFree{background:none;border:1px solid var(--line)}
+#bFree:hover{border-color:#7a6a55;background:rgba(233,221,196,.03)}
+#bFree .mic{background:none;border:1px solid var(--line);color:var(--paper);border-radius:2px}
+#bFree .mgo{color:var(--paper)}
+.mcard .mtx b{font-family:var(--display);font-weight:400;font-size:21px;letter-spacing:0}
+.mcard .mgo{font-weight:500}
+.perfchip{border-radius:3px;background:none;border:1px solid var(--line);color:var(--mute)}
+.verline{color:#6e6455}
+#title .fine{font-family:var(--display);font-style:italic;font-size:13.5px;color:#857a68}
+/* painéis */
+.hubcard,.item,.relic,.mem{border-radius:3px}
+#overlay>.in{border-radius:3px;border:1px solid var(--line);background:var(--ink2);box-shadow:0 24px 60px rgba(0,0,0,.55)}
+/* Retornos: a carta é um fólio de pergaminho com filete duplo e capitular na cor de quem fala */
+#rg.screen{box-shadow:inset 0 0 0 100vmax rgba(27,23,19,.70)}
+.rgcard{--k:color-mix(in srgb,var(--c,#a69a85) 50%,#2a1f14);border-radius:4px;border:1px solid #8c7b5d;background:#e2d3b3;
+  box-shadow:inset 0 0 0 7px #e2d3b3,inset 0 0 0 8px var(--k),inset 0 0 0 10px #e2d3b3,inset 0 0 0 11px var(--k),0 22px 34px -20px #000}
+.rgcard .rgart{opacity:.16;color:var(--k)}
+.rgcard .rgpic{font-family:var(--black);color:var(--k);text-shadow:none;font-size:clamp(96px,34vw,150px)}
+.rgcard.nrr .rgpic{font-family:var(--display);color:#6b5a40}
+.rgname{font-family:var(--display);font-style:italic;letter-spacing:0;font-size:20px}
+.rgq{font-family:var(--display);font-size:19px}
+.rgq.ans{color:var(--gold);font-style:italic}
+.meters .rgc{box-shadow:none}
+.bar{border-radius:2px}
+.deaths{color:var(--rubric)}
 </style>
 
 
 <div id="app">
   <section id="title" class="screen">
-    <svg class="sigilo" viewBox="0 0 120 140" aria-hidden="true">
-      <defs>
-        <linearGradient id="lgOuro" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f3d58a"/><stop offset=".55" stop-color="#d6a548"/><stop offset="1" stop-color="#8a5a1e"/></linearGradient>
-        <linearGradient id="lgEscudo" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7a1f2e"/><stop offset="1" stop-color="#3a0d16"/></linearGradient>
-        <clipPath id="cpTopo"><path d="M44 40 H76 Q76 58 60 70 Q44 58 44 40Z"/></clipPath>
-        <clipPath id="cpBase"><path d="M60 70 Q76 82 76 100 H44 Q44 82 60 70Z"/></clipPath>
-      </defs>
-      <path d="M60 6 L108 20 V62 Q108 104 60 134 Q12 104 12 62 V20Z" fill="url(#lgEscudo)" stroke="url(#lgOuro)" stroke-width="3"/>
-      <path d="M60 14 L100 26 V62 Q100 98 60 124 Q20 98 20 62 V26Z" fill="none" stroke="#d6a548" stroke-opacity=".35" stroke-width="1"/>
-      <rect x="38" y="32" width="44" height="7" rx="2" fill="url(#lgOuro)"/>
-      <rect x="38" y="101" width="44" height="7" rx="2" fill="url(#lgOuro)"/>
-      <path d="M44 40 H76 Q76 58 60 70 Q76 82 76 100 H44 Q44 82 60 70 Q44 58 44 40Z" fill="rgba(239,227,200,.10)" stroke="#efe3c8" stroke-opacity=".7" stroke-width="1.6"/>
-      <g clip-path="url(#cpTopo)"><rect class="areiaT" x="40" y="44" width="40" height="30" fill="#bdb5a6"/></g>
-      <g clip-path="url(#cpBase)"><rect class="areiaB" x="40" y="88" width="40" height="14" fill="#bdb5a6"/></g>
-      <line class="fio" x1="60" y1="66" x2="60" y2="98" stroke="#d8d0c0" stroke-width="1.4" stroke-dasharray="2 3"/>
-      <circle cx="60" cy="20" r="3" fill="#d6a548"/><circle cx="22" cy="40" r="2" fill="#d6a548" opacity=".7"/><circle cx="98" cy="40" r="2" fill="#d6a548" opacity=".7"/>
+    <svg class="sigilo" viewBox="0 0 64 96" aria-hidden="true">
+      <g fill="none" stroke="#e9ddc4" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M10 8h44M10 88h44"/>
+        <path d="M14 8v-3M50 8v-3M14 88v3M50 88v3"/>
+        <path d="M17 12v72M47 12v72" stroke-width="1.2"/>
+        <path d="M21 12c0 16 9 22 11 36c2-14 11-20 11-36M21 84c0-16 9-22 11-36c2 14 11 20 11 36"/>
+        <path d="M24 20c2 7 5 11 8 14M40 20c-2 7-5 11-8 14" stroke-width=".7" opacity=".55"/>
+      </g>
+      <path class="areiaT" d="M24 24h16c-1 6-4 10-8 13c-4-3-7-7-8-13z" fill="#c9a24a"/>
+      <path class="areiaB" d="M23 84c1-7 4-11 9-12c5 1 8 5 9 12z" fill="#c9a24a"/>
+      <path class="fio" d="M32 48v34" stroke="#c9a24a" stroke-width="1" stroke-dasharray="1.5 2.5"/>
     </svg>
-    <h1><small>A</small> Ampulheta<br><span>de Cinzas</span></h1>
+    <h1 class="marca"><span class="cap" aria-hidden="true">A</span><span class="tx"><span class="l1"><span class="sr">A </span>Ampulheta</span><span class="l2">de Cinzas</span></span></h1>
     <p class="sub">Morrer não termina nada. Cada fim traz uma lembrança, e cobra um pedaço da sua mente.</p>
     <div class="stack">
       <button class="btn primary" id="bRG" style="padding:16px;min-height:72px"></button>

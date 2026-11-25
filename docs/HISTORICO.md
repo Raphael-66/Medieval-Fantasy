@@ -1,5 +1,12 @@
 # Histórico de versões
 
+## 2026-11-25 — Versão 1.2: visual "códice do copista"
+- Direção nova, mais sóbria: o jogo como o manuscrito que Tomás copia. Pigmentos de iluminura em cores chapadas (ultramar para a ação principal, rubrica para perigo, ouro só em filetes e capitulares), sem degradês nem brilhos.
+- Logotipo: capitular "A" iluminada (ultramar e ouro) + "Ampulheta" em letra gótica (UnifrakturMaguntia) e ampulheta desenhada a traço com a areia caindo.
+- Fontes: IM Fell English (títulos e textos da história), UnifrakturMaguntia (marca e capitulares das cartas), Alegreya Sans (interface).
+- Cartas do Retornos viram fólios de pergaminho com filete duplo e capitular na cor de quem fala; cenário escurecido para a carta ganhar foco.
+- Botões planos com cantos discretos; partículas da tela inicial removidas; ícone do app refeito como capitular iluminada.
+
 ## 2026-11-25 — Versão 1.1: visual medieval
 - Logotipo novo: brasão vinho com borda de ouro e uma ampulheta com areia caindo (SVG animado, `.sigilo`), no lugar do relógio.
 - Paleta nova: couro escuro, pergaminho, ouro, vinho e verdete (`:root`); azuis da interface trocados por tons quentes.
