@@ -1,0 +1,38 @@
+# Balanceamento (números atuais e como foram calibrados)
+
+## Poder de referência (Atualização 14)
+- `refPow(lv)`: com `a = (lv − 2)/3`, dano/rodada `16 + 2,3(a−1)`, defesa/rodada `11 + 2,2(a−1)`, vida `32 + 3,6(a−1)`.
+- `tuneFoe` usa esses valores (não o baralho real). Poder exibido = dano + 0,5×defesa + 0,35×vida efetiva.
+- Resultado da simulação `tests/story_sim.js` (chefes da história, % de vitória na 1ª tentativa):
+  - só joga o Retornos: passa os Arcos 1–2, trava do 3 em diante (o aprendizado por morte acaba liberando).
+  - evolução normal: ~40–100% conforme o chefe (média ~65%).
+  - investiu no Modo Livre: ~100%.
+
+## Inimigos (`TIERP` em `tuneFoe`)
+| Nível | T (rodadas de dano total do jogador) | a (fração da vida máx. por golpe médio) | b (fração da defesa média por rodada) |
+|---|---|---|---|
+| mob | 2.7 | 0.13 | 0.40 |
+| elite | 3.7 | 0.16 | 0.50 |
+| boss | 4.6 | 0.15 | 0.55 |
+| super | 5.4 | 0.15 | 0.50 |
+
+- `vida = DPT × T × alívio × mul`; `golpe médio = (vidaMáx × a + defesaPorRodada × b) × alívio × mul`, mantendo o formato do arquétipo (`ARCH[*].pat`).
+- **Alívio por nível** (`relief`): comuns/elite `1 − 0,05×(refLv − lv)` entre 0,55 e 1,35; chefes entre 0,85 e 1,3.
+- `mul`: +1,5% por arco; −10% nos arcos 1–2 (exceto super); masmorras +2% por andar.
+- Fase 2: golpes ×1,2 (chefe) ou ×1,3 (super).
+- Traços de armadura/regeneração/proteção escalam com `DPT/20` (0,85 a 2,5; proteção no máx. 1,4).
+- Dificuldade "Difícil": golpes ×1,3.
+
+## Metas usadas na calibração (simulação `tests/sim.js`, jogador automático simples)
+- Comuns: ~100% de vitória, perdendo ~25–30% da vida.
+- Elite: ~80–95%. "Mortal": 30–60%.
+- Chefe: 60–100% (varia com o baralho).
+- Super chefe na 1ª tentativa: ~10–60% no meio do jogo e ~30–90% no fim. O bônus de Retorno da Ampulheta compensa.
+- Robô com política simples chega ao Arco 8 do Retornos (`tests/monkey.js` com `SMART=1`).
+
+## Economia de tempo (Modo Livre)
+- Ações: 2h. Viagens: 30 min / 1h / 3h / 6h / 14h / 24–30h.
+- Cansaço: 0,5 sanidade a cada meia hora entre 22h e 24h; 1,25 de madrugada.
+
+## Super chefes canônicos (`CANON`)
+Sabina, Serpe da Bruma, Velasco, Gualter, Lotário, Teobaldo, Morvana, Duarte, Sibila, Lourenço, Gonçalo — cada um com `tr`, `tr2` e texto de fase 2 (`p2`).
