@@ -1,46 +1,24 @@
 # A Ampulheta de Cinzas — guia para o Claude
 
-Fantasia medieval original em **português do Brasil**, feita como PWA de um arquivo só. Dono: Raphael-66. Nasceu como cópia do motor do jogo `return-from-death-zero-` (que continua no repositório dele, sem mudanças): todos os nomes, lugares e a história foram trocados por criações próprias, e o Modo Retornos ganhou uma campanha nova de 10 arcos no Reino de Lusávia, no ano da Peste de 1348.
+Jogo de decisões em cartas (estilo Reigns e Lapse), em **português do Brasil**, PWA de um arquivo só. Dono: Raphael-66. Publicado em https://raphael-66.github.io/Medieval-Fantasy/
 
-Leia também: `docs/HISTORIA.md` (bíblia da história), `docs/ARQUITETURA.md`, `docs/SISTEMAS.md`, `docs/BALANCEAMENTO.md`, `docs/HISTORICO.md`, `docs/ROADMAP.md`.
+Leia antes: `docs/HISTORIA.md` (regras, atos, reviravoltas e finais).
+
+## Estrutura
+- `index.html` é **gerado**: não edite direto. Edite `fonte/motor.html` (interface e regras) e `fonte/historia.js` (cartas, atos, mortes, memórias, finais) e rode `python3 fonte/montar.py`.
+- `classico/` é a versão anterior (Modo Livre, batalhas, 10 arcos), congelada. Tem saves próprios (`amp_`), `sw.js`, testes e docs dela. Só mexa lá se o dono pedir.
+- Saves do jogo novo: `amp2_save` (partida), `amp2_meta` (memórias, finais, pessoas vistas), `amp2_nome`. Cache do service worker: `amp2-`.
 
 ## Regras do projeto
-- Todo texto do jogo e das conversas com o dono é em **português do Brasil**, tom leve e caloroso, frases curtas.
-- Personagens, lugares e história são **originais** (veja `docs/HISTORIA.md`). Não traga nomes, falas ou termos de outras obras. Ícones e ilustrações são originais (SVG/Unicode).
-- Os ids internos antigos (`emilia`, `rem`, `subaru`, `BAT.elsa`...) foram mantidos no código para não quebrar nada; o jogador só vê os nomes novos (`IDN`, `cap()`, `NAMES`, `CHAR`). Em texto novo, use sempre os nomes de exibição.
-- **Nome do herói:** o jogador escolhe (`heroName()`, chave `amp_nome`). Em texto novo, escreva "Tomás" normalmente: a camada "NOME DO PROTAGONISTA" troca na tela. Não monte frases que dependam do nome ter gênero ou tamanho específico.
-- Conteúdo de família e romance é sempre **leve e adequado** (sem nada sexual).
-- O jogo precisa funcionar **offline** e no **celular** (tela de 390 px é a referência).
-- Os saves ficam no `localStorage` do aparelho. **Nunca quebre saves antigos**: toda estrutura nova precisa de valor padrão e migração (veja `normalize`, `L()`, `RS()`, `clockify`).
+- Texto em português do Brasil, frases curtas, tom dramático mas claro. História, nomes e lugares originais.
+- O objetivo do ato tem de estar sempre claro na tela. Nada de mecânica escondida que confunda.
+- Medidores morrem nas duas pontas. Efeitos das cartas comuns são multiplicados por `EMUL` (1,5) no motor. Cartas de equilíbrio (`B`) aparecem quando um medidor passa de 22 ou 78.
+- Toda carta-armadilha (`die`) precisa de um caminho seguro e, depois da morte, de uma versão alternativa ou de um ⚠ (memória). Nunca crie um beco sem saída.
+- Use `{N}` para o nome do herói nos textos.
+- Romance e família, se aparecerem, sempre leves.
 
-## Como o código está organizado (resumo)
-- `index.html` (~7.300 linhas): CSS no `<style>`, HTML mínimo das telas e **um único `<script>`** dentro de uma IIFE com `"use strict"`.
-- O código cresce em **camadas de atualização**: cada pacote novo vai no fim do script, logo **antes do bloco `/* tela inicial: Modo Retornos (principal)` e do `toTitle();`**, e estende funções antigas com o padrão:
-  ```js
-  var _velha=nomeDaFuncao;
-  nomeDaFuncao=function(...){ /* antes */ _velha(...); /* depois */ };
-  ```
-  A ordem importa: a última camada envolve todas as anteriores. Funções muito usadas nesse padrão: `startBattle`, `endBattle`, `playCard`, `endTurn`, `renderBattle`, `renderHub`, `sleepDay`, `goPlace`, `levelize`, `eq`, `placeOf`, `sleepPlace`, `personMenu`, `paneStore`, `openMenu` (esta foi editada no lugar).
-- Ganchos de extensão prontos: `PAX` (botões de ação no lugar do mapa), `PAH` (tratadores dessas ações), `WSEC` (seções da aba Mundo), `MAPTOP`, `ACH` (conquistas), `CARDS`/`addC` (cartas), `GD`/`tierSet` (itens/espólios).
-
-## Fluxo de trabalho de uma atualização
-1. `git pull`, ler a parte relevante do `index.html` (grep pelo nome da função).
-2. Escrever o pacote novo numa camada no fim do script (ou editar no lugar, se for correção pontual).
-3. Checar sintaxe: extrair o `<script>` e rodar `node --check`.
-4. Rodar os testes em `tests/` (veja `tests/README.md`): pelo menos `flow.js`, `rg.js` e o `monkey.js` nos dois modos.
-5. **Atualizar a versão do service worker** em `sw.js` (as strings `versão XXXX` e `amp-XXXX` com um hash novo); sem isso o celular continua com a versão antiga.
-6. Atualizar `docs/HISTORICO.md` (e os outros docs se mudar algo estrutural).
-7. Commit em português, push na `main`. O GitHub Pages publica sozinho em ~1 minuto.
-
-## Armadilhas conhecidas
-- **Coerência com a história:** nenhum personagem ou lugar pode aparecer antes do arco em que entra na história. Ao criar conteúdo novo com personagens, confira `CHAR_ARC`/`CHAR_RE` (redefinidos na camada da história); textos que citam nomes são filtrados por `textArc`.
-- **10 arcos:** use `NARC` em vez de números fixos. A campanha fica na camada "A Ampulheta de Cinzas" (perto do fim do script): `ARCS`, cartas `h1_...h10_`, `AGOAL`, `MD`, `ARCALLY`, `STORYBAT`, `CREQ`. Leonor dorme do fim do Arco 4 até o Arco 8.
-- **Interface do hub:** `hubDrawers` reorganiza o DOM depois do `renderHub` (Atualização 18). Cartões novos com `.sec`/título caem em "Mais" se não forem classificados; ações novas do mapa precisam de uma categoria em `ACAT` (pelo `data-ac`). Abas novas do menu precisam entrar em `MGROUP`.
-- `S.t` no Modo Livre é um **getter** calculado de `S.h` (horas). Nunca retorna 3; use `S.h` para horário. `advanceTime(h)` aceita horas (padrão 2h).
-- Overlays (`#overlay`) são reaproveitados: sempre conferir `$("#overlay").hidden` antes de abrir outro automaticamente.
-- `renderBattle` recria o DOM da batalha: animações flutuantes vão para a camada fixa `#fxl`.
-- Perfil compartilhado entre modos: `PF` (`amp_pf`). Todas as chaves de save usam o prefixo `amp_` (e o cache `amp-`) para não colidir com o jogo original no mesmo site. Cartas extras, moedas, fragmentos etc. sincronizam via `pfPull`/`pfPush` (`PF.sh`).
-- A classe CSS `.me` era usada no painel e na barra de vida: a barra do jogador agora é `.bar.hpme`.
-
-## Ferramentas externas
-- **Conector Unity (`Raphael-66/engine`)**: servidor MCP + pacote do Editor para o Claude controlar o Unity (versão de referência: Unity 6 / 6000.0 LTS). Fica **só** naquele repositório: não copie o código para cá. Este jogo é HTML/JS e não usa o conector; mudanças no conector vão em commits no `engine`.
+## Fluxo de atualização
+1. Editar `fonte/`, rodar `python3 fonte/montar.py`, checar sintaxe (extrair o `<script>` e `node --check`).
+2. Rodar `MODE=smart RUNS=30 node tests/harness.js tests/sim.js` e `MODE=random ...` (veja `tests/README.md`).
+3. Trocar o hash em `sw.js` (`versão XXXX` e `amp2-XXXX`).
+4. Atualizar `docs/HISTORICO.md`. Commit em português e push na `main`.

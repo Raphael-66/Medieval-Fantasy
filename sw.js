@@ -1,14 +1,14 @@
-/* Service worker, versão 2334aaab6d. Muda a cada atualização do jogo, o que faz o navegador baixar a nova versão. */
-var V="amp-2334aaab6d",FILES=["./","./index.html","./manifest.webmanifest","./icons/icon-192.png","./icons/icon-512.png","./icons/apple-touch-icon.png"];
+/* Service worker, versão 6d189e0de4. Muda a cada atualização do jogo, o que faz o navegador baixar a nova versão. */
+var V="amp2-6d189e0de4",FILES=["./","./index.html","./manifest.webmanifest","./icons/icon-192.png","./icons/icon-512.png","./icons/apple-touch-icon.png"];
 self.addEventListener("install",function(e){e.waitUntil(caches.open(V).then(function(c){return c.addAll(FILES)}).then(function(){return self.skipWaiting()}))});
-self.addEventListener("activate",function(e){e.waitUntil(caches.keys().then(function(ks){return Promise.all(ks.filter(function(k){return k.indexOf("amp-")===0&&k!==V}).map(function(k){return caches.delete(k)}))}).then(function(){return self.clients.claim()}))});
+self.addEventListener("activate",function(e){e.waitUntil(caches.keys().then(function(ks){return Promise.all(ks.filter(function(k){return k.indexOf("amp2-")===0&&k!==V}).map(function(k){return caches.delete(k)}))}).then(function(){return self.clients.claim()}))});
 /* Rede primeiro (3 s), cópia salva se estiver offline ou lento. Assim o jogo sempre pega a versão nova quando há internet. */
 self.addEventListener("fetch",function(e){
   var r=e.request;if(r.method!=="GET")return;
   var u=new URL(r.url);
   /* fontes do Google: guardadas na primeira visita, para o jogo ficar bonito também offline */
   if(/^fonts\.(googleapis|gstatic)\.com$/.test(u.hostname)){
-    e.respondWith(caches.open("fontes-amp").then(function(c){return c.match(r).then(function(m){
+    e.respondWith(caches.open("fontes-amp2").then(function(c){return c.match(r).then(function(m){
       var net=fetch(r).then(function(n){if(n&&(n.ok||n.type==="opaque"))c.put(r,n.clone());return n}).catch(function(){return m});
       return m||net;
     })}));return;

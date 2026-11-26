@@ -1,8 +1,12 @@
 # A Ampulheta de Cinzas
 
-Fantasia medieval em cartas, para celular e offline. Reino de Lusávia, ano da Peste de 1348: um jovem copista da ilha de Alvor, com uma ampulheta que o faz voltar no tempo sempre que morre, atravessa 10 arcos de história até a coroação de uma nova rainha. **Você escolhe o nome do herói** na primeira partida (o padrão é Tomás) e pode trocá-lo quando quiser na tela inicial.
+Um jogo de decisões em cartas, no estilo de Reigns e Lapse, para jogar no celular, até sem internet.
 
-- **Modo Retornos**: a história em cartas de deslizar, do Arco 1 ao 10, com mortes que viram memórias, metas de arco e batalhas de cartas.
-- **Modo Livre**: vida no reino, com mapa, moradias, romance, família, masmorras, pesca, comércio, torneio e guerra. Tudo fortalece Tomás nos Retornos.
+**Valcorte, 1348.** O rei foi envenenado e a Peste Negra vem pelo mar. Você é o escrivão da jovem rainha Isolda, com o nome que quiser. Cada carta é um pedido à coroa: deslize para um lado ou para o outro e mantenha **Fé, Povo, Nobreza e Tesouro** em equilíbrio. Se qualquer um deles acabar, você morre. Se ficar forte demais, também.
 
-A história completa está em [`docs/HISTORIA.md`](docs/HISTORIA.md). Para hospedar e instalar no celular, veja [`LEIA-ME.md`](LEIA-ME.md).
+Quando você morre, a ampulheta do abade de Alvor faz a areia voltar. Só você lembra do que aconteceu, e cada memória abre caminhos novos. Cinco atos, uma trama cheia de reviravoltas e cinco finais. Sem batalhas: só escolhas.
+
+Jogue em: https://raphael-66.github.io/Medieval-Fantasy/
+
+- Roteiro e regras: [`docs/HISTORIA.md`](docs/HISTORIA.md)
+- A versão anterior (com Modo Livre, batalhas e 10 arcos) continua em [`classico/`](classico/).
