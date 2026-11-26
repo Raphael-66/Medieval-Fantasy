@@ -1,5 +1,10 @@
 # Histórico
 
+## 2026-11-26 — Versão 2.0.1: tela de morte no celular
+- Corrigido: ao morrer, a carta que saiu voando deixava a página mais larga e o celular diminuía o zoom de tudo. A tela agora fica travada na largura do aparelho (`overflow: clip`, `minimum-scale=1`), e a carta volta ao lugar quando aparece a morte, o fim de ato ou um final.
+- Avisos (como "Memória guardada" e "Marco") aparecem no alto da tela, sem cobrir o botão "Virar a ampulheta".
+- Teste novo `tests/morte_tela.js` (celular com toque).
+
 ## 2026-11-26 — Versão 2.0: o jogo novo
 - Jogo refeito do zero, focado só em cartas de decisão, no estilo Reigns e Lapse. Sem batalhas, sem cartas de combate e sem Modo Livre.
 - Quatro medidores (Fé, Povo, Nobreza, Tesouro) que matam nas duas pontas, com prévia ao arrastar (verde sobe, vermelho desce, ponto grande muda muito) e aviso quando um deles chega perto do fim.

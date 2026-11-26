@@ -1,5 +1,5 @@
-/* Service worker, versão f90206e773. Muda a cada atualização do jogo, o que faz o navegador baixar a nova versão. */
-var V="amp2-f90206e773",FILES=["./","./index.html","./manifest.webmanifest","./icons/icon-192.png","./icons/icon-512.png","./icons/apple-touch-icon.png"];
+/* Service worker, versão 74340c8c61. Muda a cada atualização do jogo, o que faz o navegador baixar a nova versão. */
+var V="amp2-74340c8c61",FILES=["./","./index.html","./manifest.webmanifest","./icons/icon-192.png","./icons/icon-512.png","./icons/apple-touch-icon.png"];
 self.addEventListener("install",function(e){e.waitUntil(caches.open(V).then(function(c){return c.addAll(FILES)}).then(function(){return self.skipWaiting()}))});
 self.addEventListener("activate",function(e){e.waitUntil(caches.keys().then(function(ks){return Promise.all(ks.filter(function(k){return k.indexOf("amp2-")===0&&k!==V}).map(function(k){return caches.delete(k)}))}).then(function(){return self.clients.claim()}))});
 /* Rede primeiro (3 s), cópia salva se estiver offline ou lento. Assim o jogo sempre pega a versão nova quando há internet. */
