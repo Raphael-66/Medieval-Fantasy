@@ -443,7 +443,7 @@ function toTitle(){
   screen("title");S=lsGet("amp2_save",null);
   var b=$("#tPlay");
   if(S&&!S.ended){var a=ACTS[S.act-1];b.innerHTML='Continuar<small>'+a.n+' · '+esc(a.t)+' · '+S.ret+' retornos</small>'}
-  else b.innerHTML='Começar a história<small>Cerca de uma hora · cinco atos</small>';
+  else b.innerHTML='Começar a história<small>Cinco atos · cerca de 40 minutos</small>';
 }
 $("#tPlay").onclick=function(){
   if(S&&!S.ended){if(S.cur&&CARDS[S.cur])show(CARDS[S.cur],S.curBeat);else nextCard();return}
