@@ -773,6 +773,11 @@ html.calm .sigilo *{animation:none}
 .tab{border-radius:3px}
 .chipb{border-radius:3px}
 #toast{border-radius:3px}
+
+/* nome do protagonista */
+.nomebox{display:flex;flex-direction:column;gap:12px;padding:22px 20px !important}
+.nomebox input{background:var(--ink);border:1px solid var(--line);border-radius:3px;padding:12px 14px;font-family:var(--display);font-size:22px;color:var(--paper)}
+.nomebox input:focus{border-color:var(--gold);outline:none}
 </style>
 
 
@@ -10099,6 +10104,62 @@ CREQ={
 CFLAGS.push("quebrou","guardou");
 addC({id:"ampquebrada",n:"Ampulheta quebrada",c:2,heal:10,blk:10,draw:1,o:"subaru",arc:10,p:20,t:"Sem voltar atrás. Por isso, cada passo vale."});
 addC({id:"coroagelo",n:"Juramento da Coroa",c:3,dmg:14,multi:2,o:"emilia",arc:10,p:20,t:"Gelo e promessa no mesmo golpe."});
+
+/* =====================================================================
+   NOME DO PROTAGONISTA: o jogador escolhe como o herói se chama.
+   O padrão é Tomás. O nome fica em amp_nome e vale nos dois modos.
+   Os textos continuam escritos com "Tomás"; a troca acontece na tela.
+   ===================================================================== */
+var HERO_DEF="Tomás";
+function heroName(){var n=gget("amp_nome",null);return (typeof n==="string"&&n.trim())?n.trim():HERO_DEF}
+function heroSet(){return typeof gget("amp_nome",null)==="string"||!!window.__T}
+var HERO_RE=/(^|[^A-Za-zÀ-ÿ])(Tomás|Tomazito)(?![A-Za-zÀ-ÿ])/g;
+function heroText(t){var n=heroName();if(n===HERO_DEF||!t||t.indexOf("Tom")<0)return t;HERO_RE.lastIndex=0;return t.replace(HERO_RE,function(m,a){return a+n})}
+function heroFix(root){
+  if(heroName()===HERO_DEF||!root)return;
+  if(root.nodeType===3){var v=heroText(root.nodeValue);if(v!==root.nodeValue)root.nodeValue=v;return}
+  if(root.nodeType!==1||/^(INPUT|TEXTAREA|SCRIPT|STYLE)$/.test(root.tagName))return;
+  var w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:function(n){var p=n.parentNode;return p&&/^(INPUT|TEXTAREA|SCRIPT|STYLE)$/.test(p.tagName)?2:1}}),n,list=[];
+  while((n=w.nextNode()))if(n.nodeValue.indexOf("Tom")>=0)list.push(n);
+  list.forEach(function(x){var v=heroText(x.nodeValue);if(v!==x.nodeValue)x.nodeValue=v});
+}
+(function(){
+  try{new MutationObserver(function(ms){ms.forEach(function(m){if(m.type==="characterData")heroFix(m.target);else for(var i=0;i<m.addedNodes.length;i++)heroFix(m.addedNodes[i])})}).observe(document.body,{subtree:true,childList:true,characterData:true})}catch(e){}
+  if(typeof SYSTEM_RULES==="string")SYSTEM_RULES+=" O jogador pode ter dado outro nome ao herói; use o nome que aparecer na conversa.";
+})();
+function heroAsk(after,canCancel){
+  var o=$("#overlay");o.className="";o.hidden=false;
+  var cur=heroSet()?heroName():"";
+  o.innerHTML='<div class="in nomebox"><p class="sec" style="margin:0">O protagonista</p><h2 style="margin:0">Qual é o nome do herói?</h2>'+
+   '<p style="margin:0;color:var(--mute)">Um jovem copista da ilha de Alvor, com uma ampulheta que devolve o tempo. A história inteira vai chamá-lo por este nome.</p>'+
+   '<input id="hNome" type="text" maxlength="18" autocomplete="off" spellcheck="false" placeholder="'+HERO_DEF+'" value="'+esc(cur)+'">'+
+   '<p class="fine" id="hErr" style="margin:0;max-width:none">Use até 18 letras. Deixe em branco para usar '+HERO_DEF+'.</p>'+
+   '<button class="btn primary" id="hOk">'+(canCancel?"Salvar nome":"Começar a história")+'</button>'+(canCancel?'<button class="btn" id="hNo">Cancelar</button>':'')+'</div>';
+  var inp=$("#hNome");setTimeout(function(){try{inp.focus()}catch(e){}},50);
+  function ok(){
+    var v=String(inp.value||"").replace(/\s+/g," ").trim();
+    if(v&&!/^[A-Za-zÀ-ÿ' -]{1,18}$/.test(v)){$("#hErr").textContent="Só letras, espaço, hífen e apóstrofo.";$("#hErr").style.color="var(--rubric)";return}
+    v=v?v.charAt(0).toUpperCase()+v.slice(1):HERO_DEF;
+    gset("amp_nome",v);o.hidden=true;toast("O herói se chama "+v+".");
+    if(after)after();else toTitle();
+  }
+  $("#hOk").onclick=ok;inp.onkeydown=function(e){if(e.key==="Enter")ok()};
+  var no=$("#hNo");if(no)no.onclick=function(){o.hidden=true};
+}
+/* a primeira partida pede o nome antes de começar */
+(function(){
+  var bR=$("#bRG"),bF=$("#bFree"),r0=bR.onclick,f0=bF.onclick;
+  bR.onclick=function(e){var self=this;if(!heroSet()&&!gget(skey("rg"),null)){heroAsk(function(){r0.call(self,e)});return}r0.call(this,e)};
+  bF.onclick=function(e){var self=this;if(!heroSet()&&!gget("amp_free",null)){heroAsk(function(){f0.call(self,e)});return}f0.call(this,e)};
+})();
+/* botão na tela inicial para trocar o nome quando quiser */
+var _ttHero=toTitle;
+toTitle=function(){
+  _ttHero();
+  var d=$("#bDiff");if(!d)return;var b=$("#bNome");
+  if(!b){b=document.createElement("button");b.className="btn small";b.id="bNome";d.parentNode.insertBefore(b,d);b.onclick=function(){heroAsk(null,true)}}
+  b.textContent="Protagonista: "+heroName();
+};
 
 /* tela inicial: Modo Retornos (principal) e Modo Livre, ligados entre si.
    O antigo modo história em slots só aparece para quem ainda tem save nele. */

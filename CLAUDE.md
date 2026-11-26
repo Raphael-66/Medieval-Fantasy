@@ -8,6 +8,7 @@ Leia também: `docs/HISTORIA.md` (bíblia da história), `docs/ARQUITETURA.md`, 
 - Todo texto do jogo e das conversas com o dono é em **português do Brasil**, tom leve e caloroso, frases curtas.
 - Personagens, lugares e história são **originais** (veja `docs/HISTORIA.md`). Não traga nomes, falas ou termos de outras obras. Ícones e ilustrações são originais (SVG/Unicode).
 - Os ids internos antigos (`emilia`, `rem`, `subaru`, `BAT.elsa`...) foram mantidos no código para não quebrar nada; o jogador só vê os nomes novos (`IDN`, `cap()`, `NAMES`, `CHAR`). Em texto novo, use sempre os nomes de exibição.
+- **Nome do herói:** o jogador escolhe (`heroName()`, chave `amp_nome`). Em texto novo, escreva "Tomás" normalmente: a camada "NOME DO PROTAGONISTA" troca na tela. Não monte frases que dependam do nome ter gênero ou tamanho específico.
 - Conteúdo de família e romance é sempre **leve e adequado** (sem nada sexual).
 - O jogo precisa funcionar **offline** e no **celular** (tela de 390 px é a referência).
 - Os saves ficam no `localStorage` do aparelho. **Nunca quebre saves antigos**: toda estrutura nova precisa de valor padrão e migração (veja `normalize`, `L()`, `RS()`, `clockify`).

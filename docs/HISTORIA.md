@@ -3,6 +3,8 @@
 Fantasia medieval original. Lugar: o Reino de Lusávia, num ano parecido com o nosso 1348, quando a Peste Negra cruzou a Europa. O contexto histórico aparece como pano de fundo: a febre que chega nos navios mercantes, as cidades que fecham as portas por quarenta dias, as procissões de flagelantes e as vilas que perdem um terço da gente.
 
 ## A premissa
+O nome do protagonista é escolhido pelo jogador (padrão: Tomás). Nos textos do código ele continua escrito como "Tomás"; a troca é feita na tela por `heroText`/`heroFix`.
+
 Tomás de Alvor é um noviço copista da ilha de Alvor, a oeste do reino. A febre matou os monges do seu mosteiro. Antes de morrer, o abade lhe deu uma ampulheta de vidro negro cheia de cinzas: "Nunca a quebre. E nunca conte a ninguém o que ela faz."
 Sempre que Tomás morre, a areia volta e ele acorda num ponto anterior, com as memórias. Se tentar contar a alguém, dedos de cinza apertam seu coração.
 No Arco 10 ele descobre a verdade: a ampulheta guarda cinzas do coração da Rainha Cinzenta, e cada volta a alimenta.

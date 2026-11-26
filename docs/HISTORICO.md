@@ -1,5 +1,10 @@
 # Histórico de versões
 
+## 2026-11-25 — Versão 1.4: nome do protagonista
+- O jogador escolhe o nome do herói na primeira partida (Retornos ou Modo Livre) e pode trocar depois pelo botão "Protagonista" na tela inicial. Padrão: Tomás.
+- O nome fica em `amp_nome` e vale nos dois modos. Os textos continuam escritos com "Tomás"; um `MutationObserver` troca o nome (e o apelido "Tomazito") em tudo o que aparece na tela, sem mexer em campos de texto.
+- Teste novo `tests/v27_nome.js`.
+
 ## 2026-11-25 — Versão 1.3: mapa de pergaminho e acabamento
 - Mapa redesenhado como carta antiga: terra cor de velino, mar em aguada de verdete, montanhas e rótulos em tinta sépia, cidades como selos em ultramar e ouro, posição atual marcada em vermelho de rubrica.
 - Corrigidos nomes antigos que ainda apareciam no mapa (rótulos em maiúsculas) e a árvore do sábio Alvar.
